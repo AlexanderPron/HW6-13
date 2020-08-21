@@ -1,7 +1,7 @@
 from bottle import route
 from bottle import run
 from bottle import HTTPError
-from bottle import template
+from bottle import get, static_file
 import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -18,10 +18,19 @@ class AlbumDB(Base):
 @route('/')
 def openIndex():
     try:
-        return template('index.html')
-    except HTTPError as e:
+        return static_file('index.html', root = './static/')
+    except Exception as e:
         errorStr = 'index.html не найден!</br>{}'.format(e)
         return errorStr
+
+@route('/static/<filename:path>')
+def st(filename):
+    return static_file(filename, root="./static/")
+
+    # @route('/login', method='POST')
+    # username = request.forms.get('username')
+    # password = request.forms.get('password')
+
 
 
 if __name__ == "__main__":

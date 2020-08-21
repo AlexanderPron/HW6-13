@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HW B6-13</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <h1>Домашка по модулю B6.13</h1>
     <h2>Работа с базой данных, содержащей альбомы артистов/групп</h2>
+    <hr>
     <p>В базе есть данные исполнителей:</p>
     <form class="showAlbums" action="#" method="GET"> <!--   action="/albums/<artist>" -->
         <select name="artist" id="artist_id" required>
@@ -35,10 +38,10 @@
             <input type="text" name="albumYear"  placeholder="Год выпуска альбома...">
         </div>
 
-        <button class="addBtn" type="submit">Добавить </button>
+        <button class="btn btn-primary" type="submit">Добавить </button>
     </form>
 
     </form>
-    
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

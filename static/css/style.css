@@ -1,0 +1,12 @@
+p{
+    color: brown;
+}
+input{
+    width: 300px;
+}
+.addAlbumInput {
+    max-width: 30%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
