@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW B6-13</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Домашка по модулю B6.13</h1>
+    <h2>Работа с базой данных, содержащей альбомы артистов/групп</h2>
+    <p>В базе есть данные исполнителей:</p>
+    <form class="showAlbums" action="#" method="GET"> <!--   action="/albums/<artist>" -->
+        <select name="artist" id="artist_id" required>
+            <option value="">Выберите исполнителя</option>
+        </select>
+        <button class="showBtn" type="submit">Показать </button>
+    </form>
+    <p>Для добавления нового альбома заполните форму:</p>
+    <form class="addAlbum" action="/albums/" method="POST"> <!--   action="/albums/<artist>" -->
+        <div class="addAlbumInput">
+            <label for="">Название альбома </label>
+            <input type="text" name="albumName" required placeholder="Название альбома...">
+        </div>
+        <div class="addAlbumInput">
+            <label for="">Исполнитель </label>
+            <input type="text" name="artistName" required placeholder="Исполнитель/группа...">
+        </div>
+        <div class="addAlbumInput">
+            <label for="">Музыкальное направление </label>
+            <input type="text" name="albumGenre"  placeholder="Музыкальное направление...">
+        </div>
+        <div class="addAlbumInput">
+            <label for="">Год выпуска альбома </label>
+            <input type="text" name="albumYear"  placeholder="Год выпуска альбома...">
+        </div>
+
+        <button class="addBtn" type="submit">Добавить </button>
+    </form>
+
+    </form>
+    
+</body>
+</html>
