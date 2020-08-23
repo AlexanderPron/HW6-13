@@ -15,8 +15,14 @@
     <p>В базе есть данные исполнителей:</p>
     <form class="showAlbums" action="#" method="GET"> <!--   action="/albums/<artist>" -->
         <select name="artist" id="artist_id" required>
-            <option value="">Выберите исполнителя</option>
-        </select>
+            <script type="text/javascript">
+            var artists = ["q1","q2","q3"];
+                document.write('<option>Выберете из списка</option>');
+                    for (var i = 1; i <= artists.length; i++){
+                        document.write('<option value="' + i + '">' + artists[i-1] + '</option>');
+                }
+            </script>
+            </select>
         <button class="showBtn" type="submit">Показать </button>
     </form>
     <p>Для добавления нового альбома заполните форму:</p>

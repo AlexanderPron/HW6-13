@@ -1,7 +1,7 @@
-from bottle import route
+from bottle import route, request
 from bottle import run
 from bottle import HTTPError
-from bottle import get, static_file
+from bottle import get, post, static_file
 import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -27,9 +27,27 @@ def openIndex():
 def st(filename):
     return static_file(filename, root="./static/")
 
-    # @route('/login', method='POST')
-    # username = request.forms.get('username')
-    # password = request.forms.get('password')
+@route('/albums/', method = 'POST')
+def displayAlbums():
+    s = connectDB(DB_PATH)
+    addAlbum(s)
+    return "Данные нового альбома добавлены в БД\n"
+
+def connectDB(path):
+    engine = sa.create_engine(path)
+    Sessions = sessionmaker(engine)
+    session = Sessions()
+    return session
+
+def addAlbum(session):
+    year = request.forms.get('albumYear')
+    artist = request.forms.get('artistName')
+    genre = request.forms.get('albumGenre')
+    album = request.forms.get('albumName')
+    newAlbum = AlbumDB(year = int(year), artist = artist, genre = genre, album = album)
+    session.add(newAlbum)
+    session.commit()
+
 
 
 
