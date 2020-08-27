@@ -10,3 +10,12 @@ input{
     justify-content: space-between;
     margin-bottom: 10px;
 }
+.right-side{
+    display: none
+}
+.full {
+    display: inline;
+}
+.vis {
+    display: flex;
+}

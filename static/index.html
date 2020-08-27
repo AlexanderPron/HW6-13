@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,46 +14,67 @@
     <h2>Работа с базой данных, содержащей альбомы артистов/групп</h2>
     <hr>
     <p>В базе есть данные исполнителей:</p>
-    <form class="showAlbums" action="#" method="GET"> <!--   action="/albums/<artist>" -->
-        <select name="artist" id="artist_id" required>
-            <script type="text/javascript">
-            var rez = $.ajax({
-                type: 'POST',
-                url: '/',
-                async:false  // Плохая практика, но работает
-            });
-            document.write('<option>Выберете из списка</option>');
-            artists_json = JSON.parse(rez.responseText)
-            for (var i = 1; i <= artists_json.length; i++){
-                document.write('<option value="' + i + '">' + artists_json[i-1] + '</option>');
-            }         
-            </script>
-            </select>
-        <button class="showBtn" type="submit">Показать </button>
-    </form>
-    <p>Для добавления нового альбома заполните форму:</p>
-    <form class="addAlbum" action="/albums/" method="POST"> <!--   action="/albums/<artist>" -->
-        <div class="addAlbumInput">
-            <label for="">Название альбома </label>
-            <input type="text" name="albumName" required placeholder="Название альбома...">
-        </div>
-        <div class="addAlbumInput">
-            <label for="">Исполнитель </label>
-            <input type="text" name="artistName" required placeholder="Исполнитель/группа...">
-        </div>
-        <div class="addAlbumInput">
-            <label for="">Музыкальное направление </label>
-            <input type="text" name="albumGenre"  placeholder="Музыкальное направление...">
-        </div>
-        <div class="addAlbumInput">
-            <label for="">Год выпуска альбома </label>
-            <input type="text" name="albumYear"  placeholder="Год выпуска альбома...">
-        </div>
+    <div class="full">
+    <div class="left-side">
+        <form class="showAlbums" action="/albums/" onsubmit = "send(this);" method="GET"> <!--   action="/albums/<artist>" -->
+            <select name="artist" id="artist_id" required>
+                <script type="text/javascript">
+                var rez = $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    async:false  // Плохая практика, но работает
+                });
+                document.write('<option>Выберите из списка</option>');
+                artists_json = JSON.parse(rez.responseText)
+                for (var i = 1; i <= artists_json.length; i++){
+                    document.write('<option value="' + artists_json[i-1] + '">' + artists_json[i-1] + '</option>');
+                }         
+                </script>
+                </select>
+            <button class="showBtn" type="submit">Показать </button>
+        </form>
+        <script type="text/javascript">
+            function send(form) {
+                form.action += document.getElementById("artist_id").value ;
+                var rez = $.ajax({
+                    type: 'GET',
+                    url: form.action,
+                    async:false  // Плохая практика, но работает
+                });
+                albums_json = JSON.stringify(rez.responseText)
+                $("#textAreaDiv").addClass("vis");
+                // document.write('<p>'+ albums_json + '</p>');
+                document.getElementById("#displayRezultId").value = albums_json;
 
-        <button class="btn btn-primary" type="submit">Добавить </button>
-    </form>
+            } ;
+        </script>
+            
+        <p>Для добавления нового альбома заполните форму:</p>
+        <form class="addAlbum" action="/albums/" method="POST"> <!--   action="/albums/<artist>" -->
+            <div class="addAlbumInput">
+                <label for="">Название альбома </label>
+                <input type="text" name="albumName" required placeholder="Название альбома...">
+            </div>
+            <div class="addAlbumInput">
+                <label for="">Исполнитель </label>
+                <input type="text" name="artistName" required placeholder="Исполнитель/группа...">
+            </div>
+            <div class="addAlbumInput">
+                <label for="">Музыкальное направление </label>
+                <input type="text" name="albumGenre"  placeholder="Музыкальное направление...">
+            </div>
+            <div class="addAlbumInput">
+                <label for="">Год выпуска альбома </label>
+                <input type="text" name="albumYear"  placeholder="Год выпуска альбома...">
+            </div>
 
-    </form>
+            <button class="btn btn-primary" type="submit">Добавить </button>
+        </form>
+    </div>
+    <div class="right-side" id = "textAreaDiv">
+        <textarea name="displayRezult" id="displayRezultId" cols="30" rows="10"></textarea>
+    </div>
+    </div>
     <script src="/static/js/jquery-3.5.1.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
 </body>
