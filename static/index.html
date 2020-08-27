@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/normalize.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
     <h1>Домашка по модулю B6.13</h1>
@@ -16,11 +17,16 @@
     <form class="showAlbums" action="#" method="GET"> <!--   action="/albums/<artist>" -->
         <select name="artist" id="artist_id" required>
             <script type="text/javascript">
-            var artists = ["q1","q2","q3"];
-                document.write('<option>Выберете из списка</option>');
-                    for (var i = 1; i <= artists.length; i++){
-                        document.write('<option value="' + i + '">' + artists[i-1] + '</option>');
-                }
+            var rez = $.ajax({
+                type: 'POST',
+                url: '/',
+                async:false  // Плохая практика, но работает
+            });
+            document.write('<option>Выберете из списка</option>');
+            artists_json = JSON.parse(rez.responseText)
+            for (var i = 1; i <= artists_json.length; i++){
+                document.write('<option value="' + i + '">' + artists_json[i-1] + '</option>');
+            }         
             </script>
             </select>
         <button class="showBtn" type="submit">Показать </button>
@@ -48,6 +54,7 @@
     </form>
 
     </form>
+    <script src="/static/js/jquery-3.5.1.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
