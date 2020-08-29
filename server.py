@@ -50,8 +50,8 @@ def addAlbumPage():
 @route('/albums/<artist>', method = 'GET')
 def displayAlbums(artist):
     s = connectDB(DB_PATH)
-    data = getAlbums(s, artist)
-    albums = data[artist]
+    data = getAlbums(s, capitalize_string(artist))
+    albums = data[capitalize_string(artist)]
     formatStr = ''
     for album in albums:
         formatStr += album + '</br>' 
@@ -68,9 +68,9 @@ def connectDB(path):
 
 def addAlbum(session):
     year = request.forms.getunicode('albumYear')
-    artist = request.forms.getunicode('artistName')
-    genre = request.forms.getunicode('albumGenre')
-    album = request.forms.getunicode('albumName')
+    artist = capitalize_string(request.forms.getunicode('artistName'))
+    genre = capitalize_string(request.forms.getunicode('albumGenre'))
+    album = capitalize_string(request.forms.getunicode('albumName'))
     flag = 1
     if validateYear(year) and (not isAlbumInDB(session, album, artist)):
         newAlbum = AlbumDB(year = int(year), artist = artist, genre = genre, album = album)
@@ -131,6 +131,11 @@ def isAlbumInDB(session, album, artist):
         return True
     else:
         return False
+
+def capitalize_string(string):
+    words = string.split()
+    cap_str = " ".join([ word.capitalize() for word in words])
+    return cap_str
 
 
 
