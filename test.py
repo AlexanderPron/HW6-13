@@ -7,6 +7,7 @@ import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
+import datetime
 Base = declarative_base()
 DB_PATH = "sqlite:///albums.sqlite3"
 class AlbumDB(Base):
@@ -39,14 +40,36 @@ def getAlbums(session, artist):
         print(album.album)
     print(count)
 
+def validateYear(year):
+    print(datetime.datetime.now().year)
+    try:
+        if (int(year) >= 1700) and (int(year) <= datetime.datetime.now().year):
+            return True
+    except Exception:
+        return False
+    else:
+        return False
+
+def isAlbumInDB(session, album):
+    # SELECT * FROM album WHERE LOWER(album) = LOWER('BeggaRs bAnquet');
+    findAlbums = session.query(AlbumDB).filter(sa.func.lower(AlbumDB.album) == sa.func.lower(album)).first()
+    if findAlbums:
+        return True
+    else:
+        return False
+
 
 
 
 
 def main():
     s = connectDB(DB_PATH)
-    rez = getArtists(s)
-    print(rez)
-    getAlbums(s, "Кино")
+    # rez = getArtists(s)
+    # print(rez)
+    # getAlbums(s, "Кино")
+    # year = '1701er'
+    # print(validateYear(year))
+    print(isAlbumInDB(s, 'Beggars bAnquet'))
+
 if __name__ == "__main__":
     main()

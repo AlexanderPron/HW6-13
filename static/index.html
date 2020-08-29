@@ -10,14 +10,13 @@
     <script src="/static/js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-    <h1>Домашка по модулю B6.13</h1>
-    <h2>Работа с базой данных, содержащей альбомы артистов/групп</h2>
+    <h1 class="text-center">Домашка по модулю B6.13</h1>
+    <h2 class = "mx-sm-3 mb-2">Работа с базой данных, содержащей альбомы артистов/групп</h2>
     <hr>
-    <p>В базе есть данные исполнителей:</p>
-    <div class="full">
-    <div class="left-side">
-        <form class="showAlbums" action="/albums/" onsubmit = "send(this);" method="GET"> <!--   action="/albums/<artist>" -->
-            <select name="artist" id="artist_id" required>
+    <p class = "mx-sm-3 mb-2">В базе есть данные исполнителей:</p>
+        <form class="form-inline" action="/albums/" onsubmit = "send(this);" method="GET"> <!--   action="/albums/<artist>" -->
+            <div class="col-auto my-1">
+            <select name="artist" class="custom-select my-select" id="artist_id" required>
                 <script type="text/javascript">
                 var rez = $.ajax({
                     type: 'POST',
@@ -31,50 +30,38 @@
                 }         
                 </script>
                 </select>
-            <button class="showBtn" type="submit">Показать </button>
+            </div>
+            <div class="col-auto my-1"></div>
+                <button class="btn btn-primary" type="submit">Показать </button>
+            </div>
         </form>
         <script type="text/javascript">
             function send(form) {
                 form.action += document.getElementById("artist_id").value ;
-                var rez = $.ajax({
-                    type: 'GET',
-                    url: form.action,
-                    async:false  // Плохая практика, но работает
-                });
-                albums_json = JSON.stringify(rez.responseText)
-                $("#textAreaDiv").addClass("vis");
-                // document.write('<p>'+ albums_json + '</p>');
-                document.getElementById("#displayRezultId").value = albums_json;
-
             } ;
         </script>
             
-        <p>Для добавления нового альбома заполните форму:</p>
-        <form class="addAlbum" action="/albums/" method="POST"> <!--   action="/albums/<artist>" -->
-            <div class="addAlbumInput">
-                <label for="">Название альбома </label>
-                <input type="text" name="albumName" required placeholder="Название альбома...">
+        <p class = "mx-sm-3 mb-2">Для добавления нового альбома заполните форму:</p>
+        <form action="/albums/" method="POST">
+            <div class="form-group row">
+                <label for="albumName" class="col-sm-2 mx-sm-3 col-form-label">Название альбома </label>
+                <input type="text" class="form-control col-sm-4" name="albumName" required placeholder="Название альбома...">
             </div>
-            <div class="addAlbumInput">
-                <label for="">Исполнитель </label>
-                <input type="text" name="artistName" required placeholder="Исполнитель/группа...">
+            <div class="form-group row">
+                <label for="artistName" class="col-sm-2 mx-sm-3 col-form-label">Исполнитель </label>
+                <input type="text" class="form-control col-sm-4" name="artistName" required placeholder="Исполнитель/группа...">
             </div>
-            <div class="addAlbumInput">
-                <label for="">Музыкальное направление </label>
-                <input type="text" name="albumGenre"  placeholder="Музыкальное направление...">
+            <div class="form-group row">
+                <label for="albumGenre" class="col-sm-2 mx-sm-3 col-form-label">Музыкальное направление </label>
+                <input type="text" class="form-control col-sm-4" name="albumGenre"  placeholder="Музыкальное направление...">
             </div>
-            <div class="addAlbumInput">
-                <label for="">Год выпуска альбома </label>
-                <input type="text" name="albumYear"  placeholder="Год выпуска альбома...">
+            <div class="form-group row">
+                <label for="albumYear" class="col-sm-2 mx-sm-3 col-form-label">Год выпуска альбома </label>
+                <input type="text" class="form-control col-sm-4" name="albumYear"  placeholder="Год выпуска альбома...">
             </div>
 
-            <button class="btn btn-primary" type="submit">Добавить </button>
+            <button class="btn btn-primary mx-sm-3 mb-2" type="submit">Добавить </button>
         </form>
-    </div>
-    <div class="right-side" id = "textAreaDiv">
-        <textarea name="displayRezult" id="displayRezultId" cols="30" rows="10"></textarea>
-    </div>
-    </div>
     <script src="/static/js/jquery-3.5.1.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
 </body>

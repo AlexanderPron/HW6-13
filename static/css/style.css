@@ -1,21 +1,15 @@
+.h1-center{
+    text-align:center;
+}
 p{
     color: brown;
 }
-input{
-    width: 300px;
+.my-input{
+    width: 35%;
 }
-.addAlbumInput {
-    max-width: 30%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-.right-side{
-    display: none
-}
-.full {
+/* .full {
     display: inline;
-}
-.vis {
-    display: flex;
-}
+} */
+/* .my-select{
+    max-width: 30%;
+} */
